@@ -1,0 +1,431 @@
+/* ── Layout ─────────────────────────────────────────────────────────────── */
+.admin-page {
+  min-height: 100vh;
+  background: #0f0f13;
+  color: #e8e8f0;
+  font-family: Inter, system-ui, sans-serif;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.admin-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 0 1rem;
+  border-bottom: 1px solid #2a2a3a;
+  flex-wrap: wrap;
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #a78bfa;
+  white-space: nowrap;
+}
+
+.admin-back {
+  font-size: 0.85rem;
+  color: #7777aa;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.admin-back:hover {
+  color: #a78bfa;
+}
+
+.admin-key-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-left: auto;
+}
+
+.admin-key-row label {
+  font-size: 0.85rem;
+  color: #9999bb;
+  white-space: nowrap;
+}
+
+.admin-key-row input {
+  background: #1a1a2e;
+  border: 1px solid #3a3a5a;
+  border-radius: 6px;
+  color: #e8e8f0;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+  width: 220px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.admin-key-row input:focus {
+  border-color: #7c3aed;
+}
+
+/* ── Tabs ───────────────────────────────────────────────────────────────── */
+.admin-tabs {
+  display: flex;
+  gap: 0;
+  margin: 1.5rem 0 0;
+  border-bottom: 2px solid #2a2a3a;
+}
+
+.admin-tabs button {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  padding: 0.6rem 1.25rem;
+  color: #9999bb;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.admin-tabs button:hover {
+  color: #e8e8f0;
+}
+
+.admin-tabs button.active {
+  color: #a78bfa;
+  border-bottom-color: #7c3aed;
+  font-weight: 600;
+}
+
+/* ── Section ────────────────────────────────────────────────────────────── */
+.admin-section {
+  padding-top: 1.75rem;
+}
+
+.admin-section h2 {
+  margin: 0 0 1.25rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #c4b5fd;
+}
+
+/* ── Cards ──────────────────────────────────────────────────────────────── */
+.card {
+  background: #16162a;
+  border: 1px solid #2a2a3a;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.card h3 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #9999cc;
+}
+
+/* ── File input ─────────────────────────────────────────────────────────── */
+input[type="file"] {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: #aaaacc;
+  font-size: 0.9rem;
+}
+
+/* ── Image preview ──────────────────────────────────────────────────────── */
+.preview-wrap {
+  margin-bottom: 0.75rem;
+}
+
+.preview-img {
+  max-height: 220px;
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid #3a3a5a;
+  object-fit: contain;
+}
+
+/* ── Upload result ──────────────────────────────────────────────────────── */
+.upload-result {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: #aaaacc;
+}
+
+.face-slot-info {
+  font-family: monospace;
+  background: #0d0d1a;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 0.82rem;
+}
+
+/* ── Form grid ──────────────────────────────────────────────────────────── */
+.form-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 0.65rem 1rem;
+  align-items: start;
+  margin-bottom: 1.25rem;
+}
+
+.form-grid label {
+  font-size: 0.875rem;
+  color: #9999bb;
+  padding-top: 0.4rem;
+  text-align: right;
+}
+
+.form-grid input[type="text"],
+.form-grid
+  input:not([type="file"]):not([type="number"]):not([type="checkbox"]) {
+  background: #1a1a2e;
+  border: 1px solid #3a3a5a;
+  border-radius: 6px;
+  color: #e8e8f0;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-grid input:focus {
+  border-color: #7c3aed;
+}
+
+/* ── Face slot fields ───────────────────────────────────────────────────── */
+.face-slot-fields {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.fs-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: flex-start;
+}
+
+.fs-field span {
+  font-size: 0.75rem;
+  color: #7777aa;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fs-field input[type="number"] {
+  width: 80px;
+  background: #1a1a2e;
+  border: 1px solid #3a3a5a;
+  border-radius: 6px;
+  color: #e8e8f0;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.fs-field input[type="number"]:focus {
+  border-color: #7c3aed;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+.btn-primary {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.55rem 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    opacity 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #6d28d9;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #2a2a3a;
+  color: #c4b5fd;
+  border: 1px solid #3a3a5a;
+  border-radius: 8px;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #353550;
+}
+
+.btn-danger {
+  background: #be123c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    opacity 0.2s;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #9f1239;
+}
+
+.btn-danger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-danger-outline {
+  background: transparent;
+  color: #f87171;
+  border: 1px solid #f87171;
+  border-radius: 6px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    opacity 0.2s;
+}
+
+.btn-danger-outline:hover:not(:disabled) {
+  background: rgba(248, 113, 113, 0.1);
+}
+
+.btn-danger-outline:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Status messages ────────────────────────────────────────────────────── */
+.msg {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  padding: 0.5rem 0.85rem;
+  display: inline-block;
+}
+
+.msg.success {
+  background: rgba(52, 211, 153, 0.12);
+  color: #6ee7b7;
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+.msg.error {
+  background: rgba(248, 113, 113, 0.12);
+  color: #fca5a5;
+  border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+/* ── Manage tab ─────────────────────────────────────────────────────────── */
+.manage-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.manage-header h2 {
+  margin: 0;
+}
+
+.empty-state {
+  color: #555577;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+/* ── Template card ──────────────────────────────────────────────────────── */
+.template-card {
+  background: #16162a;
+  border: 1px solid #2a2a3a;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s;
+}
+
+.template-card:hover {
+  border-color: #4a4a6a;
+}
+
+.template-thumb {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  background: #0d0d1a;
+  display: block;
+}
+
+.template-info {
+  padding: 0.75rem;
+  flex: 1;
+}
+
+.template-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin: 0 0 0.2rem;
+  color: #e8e8f0;
+}
+
+.template-id {
+  font-size: 0.78rem;
+  color: #7777aa;
+  margin: 0 0 0.25rem;
+  font-family: monospace;
+}
+
+.template-tags {
+  font-size: 0.8rem;
+  color: #a0a0c0;
+  margin: 0 0 0.25rem;
+}
+
+.template-face {
+  font-size: 0.75rem;
+  color: #666688;
+  font-family: monospace;
+  margin: 0;
+}
+
+.template-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  border-top: 1px solid #2a2a3a;
+  background: #0f0f1a;
+}
