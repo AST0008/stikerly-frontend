@@ -8,6 +8,7 @@ import {
   Loader2,
   ArrowRight,
   MousePointer2,
+  MessageCircle,
 } from "lucide-react";
 import AdminPage from "./AdminPage";
 
@@ -57,6 +58,19 @@ function StickerCreator() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  function getWhatsAppShareHref(stickerUrl: string) {
+    const shareTarget = stickerUrl.split("?")[0];
+    const shareText = `I made this with Stickerly 🎉 ${shareTarget}`;
+    const encodedText = encodeURIComponent(shareText);
+    const isAndroid = /Android/i.test(navigator.userAgent);
+
+    if (isAndroid) {
+      return `intent://send?text=${encodedText}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
+    }
+
+    return `https://wa.me/?text=${encodedText}`;
+  }
 
   // Intro Animation with GSAP
   useGSAP(
@@ -355,6 +369,16 @@ function StickerCreator() {
               >
                 <Download className="inline-block mr-2" strokeWidth={3} /> Grab
                 It
+              </a>
+
+              <a
+                href={getWhatsAppShareHref(resultSticker)}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 w-full text-center bg-[#25D366] text-black border-4 border-black py-4 font-black uppercase text-xl brutal-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-[3px_3px_0_0_#000] transition-all"
+              >
+                <MessageCircle className="inline-block mr-2" strokeWidth={3} />
+                Share on WhatsApp
               </a>
             </div>
           )}
