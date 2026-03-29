@@ -38,6 +38,8 @@ interface Template {
   filename: string;
   tags: string[];
   face_slot?: { width: number; height: number; x: number; y: number } | null;
+  created_at?: string;
+  popularity?: number;
 }
 
 function StickerCreator() {
@@ -57,6 +59,7 @@ function StickerCreator() {
   const [templatesError, setTemplatesError] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
+  const [sortBy, setSortBy] = useState<string>("newest");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   function getWhatsAppShareHref(stickerUrl: string) {
@@ -98,15 +101,27 @@ function StickerCreator() {
       .finally(() => setTemplatesLoading(false));
   }, []);
 
-  const filtered = templates.filter((t) => {
-    if (!t.face_slot) return false;
-    const q = search.toLowerCase();
-    return (
-      t.name.toLowerCase().includes(q) ||
-      t.id.toLowerCase().includes(q) ||
-      t.tags.some((tag) => tag.toLowerCase().includes(q))
-    );
-  });
+  const filtered = templates
+    .filter((t) => {
+      if (!t.face_slot) return false;
+      const q = search.toLowerCase();
+      return (
+        t.name.toLowerCase().includes(q) ||
+        t.id.toLowerCase().includes(q) ||
+        t.tags.some((tag) => tag.toLowerCase().includes(q))
+      );
+    })
+    .sort((a, b) => {
+      if (sortBy === "name") {
+        return a.name.localeCompare(b.name);
+      } else if (sortBy === "popular") {
+        return (b.popularity || 0) - (a.popularity || 0);
+      } else {
+        const dateA = a.created_at ? new Date(a.created_at).getTime() : 0;
+        const dateB = b.created_at ? new Date(b.created_at).getTime() : 0;
+        return dateB - dateA;
+      }
+    });
 
   // Stagger animate templates when they render
   useEffect(() => {
@@ -124,7 +139,7 @@ function StickerCreator() {
         },
       );
     }
-  }, [templatesLoading, search]);
+  }, [templatesLoading, search, sortBy]);
 
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
     if (event.target.files && event.target.files[0]) {
@@ -395,13 +410,24 @@ function StickerCreator() {
               <h2 className="text-4xl font-black uppercase leading-none">
                 Select Base
               </h2>
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-full sm:w-64 border-4 border-black px-4 py-2 font-mono font-bold focus:bg-[var(--color-brutal-yellow)] outline-none transition-colors"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
+              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                <select
+                  className="w-full sm:w-auto border-4 border-black px-4 py-2 font-mono font-bold focus:bg-[var(--color-brutal-yellow)] outline-none transition-colors cursor-pointer"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                >
+                  <option value="newest">Newest</option>
+                  <option value="popular">Popularity</option>
+                  <option value="name">A-Z</option>
+                </select>
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="w-full sm:w-64 border-4 border-black px-4 py-2 font-mono font-bold focus:bg-[var(--color-brutal-yellow)] outline-none transition-colors"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </div>
             </div>
 
             {/* Template Gallery Grid */}
